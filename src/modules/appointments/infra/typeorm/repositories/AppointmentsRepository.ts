@@ -5,10 +5,6 @@ import IApponitmentsRepository from '@modules/appointments/repositories/IAppoint
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 import Appointment from '../entities/Appointment';
 
-// SOLID
-
-// L -> Liskov substitution principle.
-
 class AppointmentsRepository implements IApponitmentsRepository {
   private ormRepository: Repository<Appointment>;
 
