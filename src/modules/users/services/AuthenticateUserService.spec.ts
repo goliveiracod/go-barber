@@ -4,11 +4,16 @@ import FakeUserRepository from '../repositories/fakes/FakeUserRepository';
 import AuthenticateUserService from './AuthenticateUserService';
 import CreateUserService from './CreateUserService';
 
-describe('AuthenticateUser', () => {
-  it('should be able to authenticate', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeHashProvider = new FakeHashProvider();
+let fakeUserRepository: FakeUserRepository;
+let fakeHashProvider: FakeHashProvider;
 
+describe('AuthenticateUser', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakeUserRepository();
+    fakeHashProvider = new FakeHashProvider();
+  });
+
+  it('should be able to authenticate', async () => {
     const createUser = new CreateUserService(
       fakeUserRepository,
       fakeHashProvider,
@@ -35,9 +40,6 @@ describe('AuthenticateUser', () => {
   });
 
   it('should not be able to authenticate with a user that does not exist', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
     const authenticateUser = new AuthenticateUserService(
       fakeUserRepository,
       fakeHashProvider,
@@ -52,9 +54,6 @@ describe('AuthenticateUser', () => {
   });
 
   it('should be not able to authenticate with an incorrect email and password combination', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
     const createUser = new CreateUserService(
       fakeUserRepository,
       fakeHashProvider,
