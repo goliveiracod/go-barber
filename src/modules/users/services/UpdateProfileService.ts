@@ -42,12 +42,12 @@ export default class UpdateProfileService {
 
     Object.assign(user, { name, email });
 
-    const theOldPasswordIsTheSameThatUserPasswordToBeUpdated = await this.hashProvider.compareHash(
-      old_password,
-      user.password,
-    );
-
     if (password) {
+      const theOldPasswordIsTheSameThatUserPasswordToBeUpdated = await this.hashProvider.compareHash(
+        old_password,
+        user.password,
+      );
+
       if (!theOldPasswordIsTheSameThatUserPasswordToBeUpdated)
         throw new AppError('Wrong old password');
 
